@@ -61,19 +61,19 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements=movements=>{
-  containerMovements.innerHTML='';
+const displayMovements = movements => {
+  containerMovements.innerHTML = '';
 
-  movements.forEach((m,i)=>{
-    const type=m>0 && "deposit" || "withdrawal";
-    const html=`
+  movements.forEach((m, i) => {
+    const type = m > 0 && "deposit" || "withdrawal";
+    const html = `
     <div class="movements__row">
     <div class="movements__type movements__type--${type}">2 ${type}</div>
     <div class="movements__date">3 days ago</div>
     <div class="movements__value">${m}€</div>
     </div>
     `
-    containerMovements.insertAdjacentHTML("afterbegin",html);
+    containerMovements.insertAdjacentHTML("afterbegin", html);
 
   })
 }
@@ -93,3 +93,38 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+
+
+//Challenge #1
+
+// data 1:
+// const julia1 = [3, 5, 2, 12, 7];
+// const copyJuliasList = julia1.slice(1, -1);
+// const kate = [4, 1, 15, 8, 3];
+
+// data 2:
+// const julia2 = [9,16,6,8,3];
+// const copyJuliasList=julia2.slice(1, -1);
+// const kate = [10,5,6,1,4];
+
+
+
+const checkDogs = (juliasList,katesList) => {
+  let copyJuliasList=[...juliasList];
+  copyJuliasList=copyJuliasList.splice(1,3);
+
+  const dogsList=[...copyJuliasList,...katesList]
+
+  dogsList.forEach((d, i) => {
+    let dogAge = d >= 3 && "adult" || "puppy"
+    i++;
+    if (d >= 3) {
+      console.log(`Dog number ${i} is an ${dogAge} and it is ${d} years old`);
+    } else {
+      console.log(`Dog number ${i} is a ${dogAge} (Dog number ${i} is still a puppy 🐶🐶🐶)`);
+    }
+  })
+}
+
+checkDogs([9,16,6,8,3],[10,5,6,1,4])
