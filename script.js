@@ -80,6 +80,17 @@ const displayMovements = movements => {
 
 displayMovements(account1.movements)
 
+const createuserNames=(accounts)=>{
+  accounts.forEach(o=>o.userName=o.owner.toLowerCase().split(" ").map(n=>n[0]).join(""));
+}
+createuserNames(accounts)
+
+const calDisplaybalance=function(movements){
+  return movements.reduce((acc,mov)=>acc+mov);
+}
+
+labelBalance.textContent=`${calDisplaybalance(account1.movements)} EUR`;
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -92,39 +103,24 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+
 /////////////////////////////////////////////////
 
+const movementsdescription = movements.map((m, i) => `Movement ${++i} you ${m > 0 && "deposited" || "withdrew"} ${Math.abs(m)}`);
 
+const reducedMovements=movements.reduce((acc,curr)=> acc+curr,0);
 
-//Challenge #1
+const deposits=movements.filter(n=>n>0);
+const withdrawals=movements.filter(n=>n<0);
 
-// data 1:
-// const julia1 = [3, 5, 2, 12, 7];
-// const copyJuliasList = julia1.slice(1, -1);
-// const kate = [4, 1, 15, 8, 3];
+// Challenge #2
 
-// data 2:
-// const julia2 = [9,16,6,8,3];
-// const copyJuliasList=julia2.slice(1, -1);
-// const kate = [10,5,6,1,4];
+// data set 1 [5,2,4,1,15,8,3]
+// data set 2 [16,6,10,5,6,1,4]
 
-
-
-const checkDogs = (juliasList,katesList) => {
-  let copyJuliasList=[...juliasList];
-  copyJuliasList=copyJuliasList.splice(1,3);
-
-  const dogsList=[...copyJuliasList,...katesList]
-
-  dogsList.forEach((d, i) => {
-    let dogAge = d >= 3 && "adult" || "puppy"
-    i++;
-    if (d >= 3) {
-      console.log(`Dog number ${i} is an ${dogAge} and it is ${d} years old`);
-    } else {
-      console.log(`Dog number ${i} is a ${dogAge} (Dog number ${i} is still a puppy 🐶🐶🐶)`);
-    }
-  })
+const dogAgeToHumanAge=function(dogList){
+  return dogList.map(a=>a<=2?a*2:16+(a*4)).filter(a=>a>=18).reduce((acc,a,i,arr)=>acc+a/arr.length);
 }
 
-checkDogs([9,16,6,8,3],[10,5,6,1,4])
+console.log(dogAgeToHumanAge([5,2,4,1,15,8,3]));
+console.log(dogAgeToHumanAge([16,6,10,5,6,1,4]));
